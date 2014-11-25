@@ -6,18 +6,18 @@ import java.util.Vector;
 
 public class Snake extends GameElements{
 	public boolean isAbbgenippelt;
-	private int speed = 1500;
-	private int positionX1;
-	private int positionY1;
+	private int speed = 3500;
 	private String direction = "right";
-	private Vector<SnakeParts> parts = new Vector();
+	public int value;
+	public Vector<SnakeParts> parts = new Vector();
 	
-	Snake(int positionX, int positionY, int positionX1, int positionY1, boolean isAbgenippelt, int speed){
+	Snake(int positionX, int positionY, boolean isAbgenippelt, int speed){
 		super(positionX, positionY);
 		this.isAbbgenippelt = isAbgenippelt;
 		this.speed = speed * super.UNIT;
-		this.positionX1 = positionX1 * super.UNIT;
-		this.positionY1 = positionY1 * super.UNIT;
+		for(int i = 0; i < 9; i++){
+			parts.addElement(new SnakeParts(this.positionX/super.UNIT+i, this.positionY /super.UNIT));
+		}
 		
 		
 	}
@@ -29,7 +29,12 @@ public class Snake extends GameElements{
 		}
 	}
 	public void setSpeed(int speed){
-		this.speed = speed;
+		if(this.speed > speed){
+			this.speed = this.speed - speed;
+		}
+	}
+	public void addToValue(int val){
+		this.value += val;
 	}
 	public int getSpeed(){
 		return this.speed;
@@ -65,23 +70,45 @@ public class Snake extends GameElements{
                 break;
 		 }
 		SnakeParts lastElement = this.parts.lastElement();
-		int currentX = lastElement.positionX;
-		int currentY = lastElement.positionY;
+		int currentX = lastElement.positionX / 25;
+		int currentY = lastElement.positionY / 25;
 			if(this.direction == "right"){
-				currentX = currentX + super.UNIT;
+				currentX = currentX + 1;
 			}else if(this.direction == "left"){
-				currentX = currentX - super.UNIT;
+				currentX = currentX - 1;
 			}else if(this.direction == "up"){
-				currentY = currentY - super.UNIT;
+				currentY = currentY - 1;
 			}else if(this.direction == "down"){
-				currentY = currentY + super.UNIT;
+				currentY = currentY + 1;
 			}
 			this.parts.addElement(new SnakeParts(currentX, currentY));
 			this.parts.remove(this.parts.firstElement());
 	}
 	public void addParts(){
-		parts.addElement(new SnakeParts(this.positionX, this.positionY));
-		parts.addElement(new SnakeParts(this.positionX+super.UNIT, this.positionY));
-		parts.addElement(new SnakeParts(this.positionX+2*super.UNIT, this.positionY));
+		SnakeParts lastElement = this.parts.lastElement();
+		int currentX = lastElement.positionX / 25;
+		int currentY = lastElement.positionY / 25;
+			if(this.direction == "right"){
+				currentX = currentX + 1;
+			}else if(this.direction == "left"){
+				currentX = currentX - 1;
+			}else if(this.direction == "up"){
+				currentY = currentY - 1;
+			}else if(this.direction == "down"){
+				currentY = currentY + 1;
+			}
+			this.parts.addElement(new SnakeParts(currentX, currentY));
+		
 	}
+	public boolean checkCollison(Snake s){
+		for(SnakeParts p : parts){
+			if(p != s.parts.lastElement()){
+				if(p.positionX == s.parts.lastElement().positionX && p.positionY == s.parts.lastElement().positionY){
+			    	s.isAbbgenippelt = true;
+			    	return true;
+		    	}
+			}
+		}
+		return false;
+	};
 }

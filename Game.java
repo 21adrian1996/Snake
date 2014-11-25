@@ -5,7 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Game extends KeyAdapter {
-	private Vector<GameElements> elements;
+	private Vector<GameElements> elements = new Vector();
 	private GUI gui;
 	
 	Game(Vector<GameElements> elements){
@@ -21,31 +21,37 @@ public class Game extends KeyAdapter {
 		this.elements.addElement(element);
 	}
 	public void keyPressed(KeyEvent e) {
-		  Snake putzi = (Snake)this.elements.get(1);
-		  putzi.move(e.getKeyCode());
-		  this.gui.repaint();
+		  Snake snake = (Snake)this.elements.get(1);
+		  if(snake.isAbbgenippelt == false){
+			  snake.move(e.getKeyCode());
+			  this.gui.repaint();
+		  }
 	  }
 	public static void main(String[] args){	
 		Zufallsgenerator generator= new Zufallsgenerator();
-		Diamond dia = new Diamond(generator.zufallszahl(1, 24),generator.zufallszahl(1, 15),100);
-		Snake putzi = new Snake(1,1,6,1, false, 10);
-		putzi.addParts();
-		GameBorder border = new GameBorder(0,0,25,15);
+		Diamond dia = new Diamond(generator.zufallszahl(1, 23),generator.zufallszahl(1, 14),100);
+		Snake snake = new Snake(1,1, false, 10);
+		snake.addParts();
+		GameBorder border = new GameBorder(1,1,25,15);
 		Vector<GameElements> GameElements = new Vector();
 		GameElements.addElement(dia);
-		GameElements.addElement(putzi);
+		GameElements.addElement(snake);
 		GameElements.addElement(border);
 		Game game = new Game(GameElements);
-		while(putzi.isAbbgenippelt == false){
+		while(snake.isAbbgenippelt == false){
 			try{
-				Thread.sleep(putzi.getSpeed());
-				putzi.move(0);
+				Thread.sleep(snake.getSpeed());
+				snake.move(0);
+				for(GameElements g : game.elements){
+					g.checkCollison(snake);
+				}
 				game.gui.repaint();
 			}catch(InterruptedException e){
 				
 			} 
 			
 		}
+		System.out.println(snake.value);
 	}
 	
 }

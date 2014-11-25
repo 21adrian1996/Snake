@@ -14,5 +14,14 @@ public class GameBorder extends GameElements {
 	public void draw(Graphics g){
 		g.drawRect(1,1, this.width,this.height);
 	}
+	public boolean checkCollison(Snake s){
+				if(s.parts.lastElement().positionX == -25 || s.parts.lastElement().positionY == -25 
+						|| s.parts.lastElement().positionY == this.height || s.parts.lastElement().positionX == this.width){
+			    	s.isAbbgenippelt = true;
+			    	return true;
+		    	}
+
+		return false;
+	};
 
 }
