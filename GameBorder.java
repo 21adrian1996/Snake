@@ -15,7 +15,7 @@ public class GameBorder extends GameElements {
 		g.drawRect(1,1, this.width,this.height);
 	}
 	public boolean checkCollison(Snake s){
-				if(s.parts.lastElement().positionX == -25 || s.parts.lastElement().positionY == -25 
+				if(s.parts.lastElement().positionX == super.UNIT || s.parts.lastElement().positionY == 0-super.UNIT 
 						|| s.parts.lastElement().positionY == this.height || s.parts.lastElement().positionX == this.width){
 			    	s.isAbbgenippelt = true;
 			    	return true;
