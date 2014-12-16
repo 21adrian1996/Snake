@@ -1,12 +1,18 @@
 package snake;
 
+/**
+ * @author Adrian Berger
+ * @version 1.0.0
+ * @since jdk7.8
+ */
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Vector;
 
 public class Snake extends GameElements{
 	public boolean isAbbgenippelt;
-	private int speed = 3500;
+	private int speed = 100000;
 	private String direction = "right";
 	public int value;
 	public Vector<SnakeParts> parts = new Vector();
@@ -15,7 +21,7 @@ public class Snake extends GameElements{
 		super(positionX, positionY);
 		this.isAbbgenippelt = isAbgenippelt;
 		this.speed = speed * super.UNIT;
-		for(int i = 0; i < 9; i++){
+		for(int i = 0; i < 5; i++){
 			parts.addElement(new SnakeParts(this.positionX/super.UNIT+i, this.positionY /super.UNIT));
 		}
 		

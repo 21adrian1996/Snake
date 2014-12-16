@@ -1,7 +1,11 @@
 package snake;
 
 import java.awt.Graphics;
-
+/**
+ * @author Adrian Berger
+ * @version 1.0.0
+ * @since jdk7.8
+ */
 public abstract class GameElements {
 	protected int positionX;
 	protected int positionY;

@@ -13,6 +13,11 @@ import java.awt.event.KeyAdapter;
  */
 
 @SuppressWarnings("serial")
+/**
+ * @author Adrian Berger
+ * @version 1.0.0
+ * @since jdk7.8
+ */
 public class GUI extends JFrame {
 
   /** Referenz auf das Game-Objekt. */

@@ -2,9 +2,9 @@ package snake;
 import java.util.Random;
 
 /**
- * Hilfsklasse zum Erzeugen von Zufallszahlen.
- * 
- * @author Andres Scheidegger
+ * @author Adrian Berger
+ * @version 1.0.0
+ * @since jdk7.8
  */
 public class Zufallsgenerator {
 
